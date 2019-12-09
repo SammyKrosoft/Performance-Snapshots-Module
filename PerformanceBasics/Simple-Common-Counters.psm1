@@ -16,7 +16,7 @@ Function Get-UtilCPU {
     )
     
     #Avoiding using external function for the current function - testing if $OutputFile has been specified or not
-    If ($OutputFile -eq "" -or $OutputFile -eq $Null -or $OutputFile -eq 0) {$OutputFile = ($env:UserProfile) + "\Documents" + "\$(get-date -f yyyy-MM-dd-hh-mm-ss).csv"}
+    If ($OutputFile -eq "" -or $OutputFile -eq $Null -or $OutputFile -eq 0) {$OutputFile = ($env:UserProfile) + "\Documents" + "\Quick_Perf_CPU_$(get-date -f yyyy-MM-dd-hh-mm-ss).csv"}
     
     Get-Counter -ComputerName $Computers -Counter "Processor(_Total)\% Processor Time" -MaxSamples $NumberOfSamples -SampleInterval $Interval | ForEach-Object {
         $path = $_.CounterSamples.path
@@ -34,5 +34,5 @@ Function Get-UtilCPU {
     $TempObject | Select datetime, ComputerName, countercategory, CounterName,Value
     $TempObject | Export-CSV -Path $OutputFile -Append -NoTypeInformation
     }
-
 }
+
