@@ -23,7 +23,7 @@ Function Get-UtilCPU {
         $PropertyHash=@{
             DateTime=(Get-Date -format "yyyy-MM-d hh:mm:ss")
             ComputerName=($Path -split "\\")[2];
-            CounterCategory = ($path  -split "\\")[3];
+            CounterCategory = ($path -split "\\")[3];
             CounterName = ($path  -split "\\")[4];
             WholeCounter = $path;
             Instance = $_.CounterSamples.InstanceName ;
@@ -35,4 +35,3 @@ Function Get-UtilCPU {
     $TempObject | Export-CSV -Path $OutputFile -Append -NoTypeInformation
     }
 }
-
